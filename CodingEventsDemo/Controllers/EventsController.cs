@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,7 @@ namespace coding_events_practice.Controllers
     public class EventsController : Controller
     {
 
-        static private List<string> Events = new List<string>();
+        static private Dictionary<string, string> Events = new Dictionary<string, string>();
 
         // GET: /<controller>/
         public IActionResult Index()
@@ -28,9 +29,9 @@ namespace coding_events_practice.Controllers
 
         [HttpPost]
         [Route("Events/Add")]
-        public IActionResult NewEvent(string name)
+        public IActionResult NewEvent(string name, string description)
         {
-            Events.Add(name);
+            Events.Add(name, description);
 
             return Redirect("/Events");
         }
